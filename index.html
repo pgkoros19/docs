@@ -24,7 +24,7 @@
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--soft-grey); margin: 0; padding: 0; color: var(--text-dark); line-height: 1.6; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--soft-grey); margin: 0; padding: 0; color: var(--text-dark); line-height: 1.6; overflow-x: hidden; }
 
         .main-container { width: 100%; max-width: 600px; margin: 0 auto; padding: 15px; padding-bottom: 30px; }
 
@@ -54,13 +54,34 @@
         .card-1 .item-icon { color: var(--color-1); } .card-2 .item-icon { color: var(--color-2); } 
         .card-3 .item-icon { color: var(--color-3); } .card-4 .item-icon { color: var(--color-4); }
 
-        .item-content { flex: 1; }
+        .item-content { flex: 1; min-width: 0; }
         .item-title { font-weight: 600; color: #000; display: block; }
         .item-note { font-size: 0.88rem; color: var(--text-light); font-style: italic; display: block; margin-top: 4px; }
 
-        .emep-box { background-color: #e3f2fd; border: 1px dashed #2196f3; padding: 12px; border-radius: 8px; margin-top: 10px; font-size: 0.85rem; color: #0d47a1; }
-        .emep-box ul { margin: 8px 0 0 0; padding-left: 18px; }
-        .emep-box code { background: #fff; padding: 2px 4px; border-radius: 4px; border: 1px solid #bbdefb; font-family: monospace; font-weight: bold; }
+        /* ΔΙΟΡΘΩΣΗ ΓΙΑ ΤΟ ΚΕΠ/ΕΜΕΠ ΣΤΟ ΚΙΝΗΤΟ */
+        .emep-box { 
+            background-color: #e3f2fd; 
+            border: 1px dashed #2196f3; 
+            padding: 10px; 
+            border-radius: 8px; 
+            margin-top: 10px; 
+            font-size: 0.82rem; 
+            color: #0d47a1; 
+            word-wrap: break-word; 
+            overflow-wrap: break-word;
+        }
+        .emep-box ul { margin: 8px 0 0 0; padding-left: 15px; }
+        .emep-box li { margin-bottom: 5px; line-height: 1.3; }
+        .emep-box code { 
+            background: #fff; 
+            padding: 2px 4px; 
+            border-radius: 4px; 
+            border: 1px solid #bbdefb; 
+            font-family: monospace; 
+            font-weight: bold;
+            display: inline-block;
+            max-width: 100%;
+        }
 
         .sos-note { background-color: #fff3cd; color: #856404; padding: 12px; border-radius: 8px; margin-top: 15px; font-size: 0.85rem; border: 1px solid #ffeeba; display: flex; align-items: center; }
 
@@ -97,7 +118,7 @@
             <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-book-medical item-icon"></i><div class="item-content"><span class="item-title">Ασφαλιστικά Βιβλιάρια ΟΑΕΕ</span><span class="item-note">Μέχρι το 2006 αν υπήρχε χρόνος</span></div></div>
             <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-copy item-icon"></i><div class="item-content"><span class="item-title">Καρτέλες Ενσήμων ΙΚΑ</span><span class="item-note">Μέχρι το 2001 αν υπήρχε χρόνος</span></div></div>
             <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-landmark item-icon"></i><div class="item-content"><span class="item-title">Για Δημόσιο: Πιστοποιητικό Υπηρεσιακών Μεταβολών</span></div></div>
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-file-invoice-dollar item-icon"></i><div class="item-content"><span class="item-title">Για Δημόσιο: Ανάλυση Ετήσιων Αποδοχών</span><span class="item-note">Πίνακας από το 2002 ή από την ημερομηνία διορισμού</span></div></div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-file-invoice-dollar item-icon"></i><div class="item-content"><span class="item-title">Για Δημόσιο: Ανάλυση Ετήσιων Αποδοχών</span><span class="item-note">Πίνακας από το 2002 ή από την ημερομημία διορισμού</span></div></div>
         </div>
     </div>
 
@@ -120,7 +141,7 @@
                         <ul>
                             <li>Πρέπει να έχετε <strong>κινητό στο όνομά σας</strong> (έστω και καρτοκινητό).</li>
                             <li>Πηγαίνετε στο ΚΕΠ με την <strong>ταυτότητα</strong> και το <strong>κινητό</strong> σας.</li>
-                            <li>Αν δεν έχετε email, δηλώστε του γραφείου μας: <code>sintaxi+το_ονοματεπώνυμό_σας@taxisdp.gr</code></li>
+                            <li>Email γραφείου: <code>sintaxi+το_ονοματεπώνυμό_σας@taxisdp.gr</code></li>
                         </ul>
                     </div>
                 </div>
@@ -150,7 +171,7 @@
                         <ul>
                             <li>Πρέπει να έχετε <strong>κινητό στο όνομά σας</strong> (έστω και καρτοκινητό).</li>
                             <li>Πηγαίνετε στο ΚΕΠ με την <strong>ταυτότητα</strong> και το <strong>κινητό</strong> σας.</li>
-                            <li>Αν δεν έχετε email, δηλώστε του γραφείου μας: <code>sintaxi+το_ονοματεπώνυμό_σας@taxisdp.gr</code></li>
+                            <li>Email γραφείου: <code>sintaxi+το_ονοματεπώνυμό_σας@taxisdp.gr</code></li>
                         </ul>
                     </div>
                 </div>
@@ -178,7 +199,7 @@
                         <ul>
                             <li>Πρέπει να έχετε <strong>κινητό στο όνομά σας</strong> (έστω και καρτοκινητό).</li>
                             <li>Πηγαίνετε στο ΚΕΠ με την <strong>ταυτότητα</strong> και το <strong>κινητό</strong> σας.</li>
-                            <li>Αν δεν έχετε email, δηλώστε του γραφείου μας: <code>sintaxi+το_ονοματεπώνυμό_σας@taxisdp.gr</code></li>
+                            <li>Email γραφείου: <code>sintaxi+το_ονοματεπώνυμό_σας@taxisdp.gr</code></li>
                         </ul>
                     </div>
                 </div>
@@ -198,7 +219,7 @@
         <a href="viber://chat?number=%2B306955316277" class="btn-action btn-viber"><i class="fab fa-viber"></i> ΜΗΝΥΜΑ ΣΤΟ VIBER</a>
         <a href="mailto:sintaxi@taxisdp.gr" class="btn-action btn-email"><i class="fas fa-envelope"></i> ΑΠΟΣΤΟΛΗ EMAIL</a>
         <a href="tel:6955316277" class="btn-action btn-call"><i class="fas fa-phone-alt"></i> ΚΛΗΣΗ ΣΤΟ ΓΡΑΦΕΙΟ</a>
-        <a href="https://maps.google.com/?cid=2544142880748857183&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="btn-action btn-maps"><i class="fas fa-directions"></i> ΟΔΗΓΙΕΣ ΣΤΟΥΣ ΧΑΡΤΕΣ</a>
+        <a href="https://maps.app.goo.gl/ChIJ2dHXcTIXYBMRX-ffeHicTiM" target="_blank" class="btn-action btn-maps"><i class="fas fa-directions"></i> ΟΔΗΓΙΕΣ ΣΤΟΥΣ ΧΑΡΤΕΣ</a>
     </div>
 </div>
 
