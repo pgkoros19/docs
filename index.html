@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Γκόρος Πέτρος | Fast Track Assistant </title>
+    <title>Γκόρος Πέτρος | Fast Track Assistant</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Greek:wght@700&display=swap" rel="stylesheet">
@@ -33,6 +33,7 @@
 
         .share-container { text-align: center; margin-bottom: 20px; }
         .btn-small { display: inline-flex; align-items: center; justify-content: center; background-color: var(--viber-color); color: white !important; padding: 12px 25px; border-radius: 50px; font-weight: 600; text-decoration: none; font-size: 0.85rem; }
+        .btn-small i { margin-right: 8px; }
 
         .category-card { background-color: var(--white); border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 15px; border-left: 6px solid #ccc; overflow: hidden; }
         .card-1 { border-left-color: var(--color-1); }
@@ -49,6 +50,7 @@
         
         .docs-list { display: none; padding: 0 20px 20px 20px; background-color: #fafafa; }
         .doc-item { display: flex; align-items: flex-start; padding: 15px 0; border-bottom: 1px solid #eee; cursor: pointer; }
+        .doc-item:last-child { border-bottom: none; }
         .doc-item.checked { opacity: 0.5; }
         .doc-item.checked .item-title { text-decoration: line-through; }
         
@@ -60,30 +62,14 @@
         .item-content { flex: 1; min-width: 0; }
         .item-title { font-weight: 600; color: #000; display: block; }
         .item-note { font-size: 0.88rem; color: var(--text-light); font-style: italic; display: block; margin-top: 4px; }
-
-        .info-box-static { 
-            background-color: #e3f2fd; 
-            border: 1px dashed #2196f3; 
-            padding: 15px; 
-            border-radius: 8px; 
-            font-size: 0.88rem; 
-            color: #0d47a1; 
-        }
-        .info-box-static ul { margin: 10px 0 0 0; padding-left: 20px; }
-        .info-box-static li { margin-bottom: 8px; }
-        .info-box-static code { 
-            background: #fff; 
-            padding: 2px 6px; 
-            border-radius: 4px; 
-            border: 1px solid #bbdefb; 
-            font-family: monospace; 
-            font-weight: bold;
-        }
+        .item-note code { background: #eee; padding: 2px 4px; border-radius: 4px; font-family: monospace; font-weight: bold; font-style: normal; color: #c0392b; }
 
         .sos-note { background-color: #fff3cd; color: #856404; padding: 12px; border-radius: 8px; margin-top: 15px; font-size: 0.85rem; border: 1px solid #ffeeba; display: flex; align-items: center; }
+        .sos-note i { margin-right: 10px; }
 
         .footer-info { background-color: var(--white); padding: 30px 20px; border-radius: 12px; margin-top: 30px; text-align: center; border: 1px solid var(--border-color); }
         .btn-action { display: inline-flex; align-items: center; justify-content: center; color: white !important; padding: 16px 20px; border-radius: 50px; margin-top: 10px; font-weight: 700; text-decoration: none; width: 100%; font-size: 0.9rem; }
+        .btn-action i { margin-right: 10px; }
         .btn-viber { background-color: var(--viber-color); } 
         .btn-email { background-color: var(--email-color); }
         .btn-call { background-color: var(--terracotta); }
@@ -95,13 +81,13 @@
 <div class="main-container">
 
     <div class="header">
-        <h1>Οδηγίες & Δικαιολογητικά </h1>
+        <h1>Οδηγίες & Δικαιολογητικά</h1>
         <p>Διεκπεραίωση Συνταξιοδοτικών Υποθέσεων</p>
         <p>Γκόρος Πέτρος</p>
     </div>
 
     <div class="share-container">
-        <a href="viber://forward?text=Δείτε εδώ τα δικαιολογητικά: https://pgkoros19.github.io/docs/" class="btn-small"><i class="fab fa-viber"></i> &nbsp; ΑΠΟΣΤΟΛΗ ΛΙΣΤΑΣ ΣΕ ΕΠΑΦΗ</a>
+        <a href="viber://forward?text=Δείτε εδώ τα δικαιολογητικά: https://pgkoros19.github.io/docs/" class="btn-small"><i class="fab fa-viber"></i>ΑΠΟΣΤΟΛΗ ΛΙΣΤΑΣ ΣΕ ΕΠΑΦΗ</a>
     </div>
 
     <div class="category-card card-1" id="card-first">
@@ -131,7 +117,7 @@
             <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-mobile-alt item-icon"></i><div class="item-content"><span class="item-title">Εθνικό Μητρώο Επικοινωνίας (ΕΜΕΠ)</span><span class="item-note">Προϋπόθεση για την υποβολή ηλεκτρονικής αίτησης</span></div></div>
             <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-home item-icon"></i><div class="item-content"><span class="item-title">Βεβαίωση Μόνιμης Κατοικίας</span></div></div>
             <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-user-shield item-icon"></i><div class="item-content"><span class="item-title">Για άνδρες: Πιστοποιητικό Στρατολογικής Κατάστασης</span><span class="item-note">Τύπου Α' (για εξαγορά πλασματικών ετών)</span></div></div>
-            <div class="sos-note"><i class="fas fa-camera"></i>&nbsp; <strong>SOS:</strong> Βεβαιωθείτε ότι οι φωτογραφίες είναι καθαρές και φαίνονται οι 4 γωνίες.</div>
+            <div class="sos-note"><i class="fas fa-camera"></i><strong>SOS:</strong> Βεβαιωθείτε ότι οι φωτογραφίες είναι καθαρές και φαίνονται οι 4 γωνίες.</div>
         </div>
     </div>
 
@@ -142,10 +128,10 @@
         <div class="card-progress"><div class="card-progress-fill"></div></div>
         <div id="thanatos" class="docs-list">
             <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-user-shield item-icon"></i><div class="item-content"><span class="item-title">Κωδικοί Taxisnet</span><span class="item-note">Θανόντος & Δικαιοδόχου</span></div></div>
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-id-card item-icon"></i><div class="item-content"><span class="item-title">Αντίγραφο Ταυτότητας</span></div></div>
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-university item-icon"></i><div class="item-content"><span class="item-title">Λογαριασμός Τράπεζας (IBAN)</span></div></div>
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-mobile-alt item-icon"></i><div class="item-content"><span class="item-title">Εθνικό Μητρώο Επικοινωνίας (ΕΜΕΠ)</span></div></div>
-           <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-file-alt item-icon"></i><div class="item-content"><span class="item-title">Ληξιαρχική Πράξη Θανάτου</span><span class="item-note">Να έχει εκδοθεί</span></div></div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-id-card item-icon"></i><div class="item-content"><span class="item-title">Αντίγραφο Ταυτότητας</span><span class="item-note">Αντίγραφο ή καθαρές φωτογραφίες</span></div></div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-university item-icon"></i><div class="item-content"><span class="item-title">Λογαριασμός Τράπεζας (IBAN)</span><span class="item-note">Βεβαίωση e-banking ή φωτοτυπία 1ης σελίδας βιβλιαρίου</span></div></div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-mobile-alt item-icon"></i><div class="item-content"><span class="item-title">Εθνικό Μητρώο Επικοινωνίας (ΕΜΕΠ)</span><span class="item-note">Προϋπόθεση για την υποβολή ηλεκτρονικής αίτησης</span></div></div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-file-alt item-icon"></i><div class="item-content"><span class="item-title">Ληξιαρχική Πράξη Θανάτου</span><span class="item-note">Να έχει εκδοθεί</span></div></div>
             <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-file-invoice item-icon"></i><div class="item-content"><span class="item-title">Πιστοποιητικό Εγγυτέρων Συγγενών</span><span class="item-note">Να έχει εκδοθεί</span></div></div>
         </div>
     </div>
@@ -157,8 +143,9 @@
         <div class="card-progress"><div class="card-progress-fill"></div></div>
         <div id="anaphria" class="docs-list">
             <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-key item-icon"></i><div class="item-content"><span class="item-title">Κωδικοί Taxisnet</span></div></div>
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-id-card item-icon"></i><div class="item-content"><span class="item-title">Αντίγραφο Ταυτότητας</span></div></div>
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-mobile-alt item-icon"></i><div class="item-content"><span class="item-title">Εθνικό Μητρώο Επικοινωνίας (ΕΜΕΠ)</span></div></div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-id-card item-icon"></i><div class="item-content"><span class="item-title">Αντίγραφο Ταυτότητας</span><span class="item-note">Αντίγραφο ή καθαρές φωτογραφίες</span></div></div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-university item-icon"></i><div class="item-content"><span class="item-title">Λογαριασμός Τράπεζας (IBAN)</span><span class="item-note">Βεβαίωση e-banking ή φωτοτυπία 1ης σελίδας βιβλιαρίου</span></div></div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-mobile-alt item-icon"></i><div class="item-content"><span class="item-title">Εθνικό Μητρώο Επικοινωνίας (ΕΜΕΠ)</span><span class="item-note">Προϋπόθεση για την υποβολή ηλεκτρονικής αίτησης</span></div></div>
             <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-notes-medical item-icon"></i><div class="item-content"><span class="item-title">Γνωμάτευση ΚΕΠΑ</span></div></div>
         </div>
     </div>
@@ -168,18 +155,12 @@
             <span>Οδηγίες για ΚΕΠ (ΕΜΕΠ)</span> <i class="fas fa-info-circle"></i>
         </div>
         <div class="card-progress"><div class="card-progress-fill"></div></div>
-        <div id="instructions" class="docs-list" style="padding-top: 20px;">
-            <div class="info-box-static">
-                <strong><i class="fas fa-id-card"></i> Διαδικασία στο ΚΕΠ:</strong>
-                <ul>
-                    <li>Πρέπει να έχετε <strong>κινητό στο όνομά σας</strong>.</li>
-                    <li>Πηγαίνετε στο ΚΕΠ με την <strong>ταυτότητα</strong> και το <strong>κινητό</strong> σας.</li>
-                    <li>Ζητήστε να δηλωθεί το κινητό και το email σας στο <strong>Εθνικό Μητρώο Επικοινωνίας (ΕΜΕΠ)</strong>.</li>
-                    <li>Email γραφείου: <code>sintaxi+το_ονοματεπώνυμό_σας@taxisdp.gr</code></li>
-                    <li style="margin-top:5px; list-style:none; color:#555;"><em>Π.χ. sintaxi+xarapetrou@taxisdp.gr</em></li>
-                </ul>
-            </div>
-            <p style="font-size: 0.85rem; color: #666; margin-top: 15px;">* Η εγγραφή στο ΕΜΕΠ είναι απαραίτητη για την ολοκλήρωση της ηλεκτρονικής αίτησης συνταξιοδότησης.</p>
+        <div id="instructions" class="docs-list">
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-mobile-screen item-icon"></i><div class="item-content"><span class="item-title">Κινητό τηλέφωνο στο όνομά σας</span><span class="item-note">Απαραίτητο για την ταυτοποίηση</span></div></div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-id-card-clip item-icon"></i><div class="item-content"><span class="item-title">Επίσκεψη στο ΚΕΠ με την ταυτότητα</span><span class="item-note">Έχετε μαζί και το κινητό σας</span></div></div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-pen-to-square item-icon"></i><div class="item-content"><span class="item-title">Δήλωση στο Εθνικό Μητρώο Επικοινωνίας (ΕΜΕΠ)</span><span class="item-note">Ζητήστε να δηλωθεί το κινητό και το email σας</span></div></div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-at item-icon"></i><div class="item-content"><span class="item-title">Email γραφείου για δήλωση:</span><span class="item-note"><code>sintaxi+το_ονοματεπώνυμό_σας@taxisdp.gr</code></span></div></div>
+            <div class="sos-note"><i class="fas fa-lightbulb"></i>Π.χ. αν το όνομα είναι Χαρά Πετρού: <code>sintaxi+xarapetrou@taxisdp.gr</code></div>
         </div>
     </div>
 
@@ -188,32 +169,27 @@
             <span>Οδηγίες για ΚΕΠΑ</span> <i class="fas fa-notes-medical"></i>
         </div>
         <div class="card-progress"><div class="card-progress-fill"></div></div>
-        <div id="kepa" class="docs-list" style="padding-top: 20px;">
-            <div class="info-box-static" style="background-color: #f9f9f9; border-color: #ccc; color: #333;">
-                <strong><i class="fas fa-hospital-user"></i> Διαδικασία Πιστοποίησης:</strong>
-                <ul>
-                    <li>Η αίτηση για ΚΕΠΑ γίνεται πλέον <strong>ηλεκτρονικά</strong>.</li>
-                    <li>Μετά την αίτηση θα σας κοινοποιήσουμε τον αριθμό πρωτοκόλλου. </li>
-                    <li>Θα επικοινωνήσετε με τους ιατρούς που θα συμπληρώσουν τον εισηγητικό φάκελο ψηφιακά.</li>
-                    <li>Θα λάβετε ενημέρωση με SMS για την ημερομηνία της εξέτασης.</li>
-                </ul>
-            </div>
-            <div class="sos-note" style="margin-top:15px;"><i class="fas fa-exclamation-triangle"></i>&nbsp; <strong>ΠΡΟΣΟΧΗ:</strong> Φροντίστε να έχετε μαζί σας όλες τις πρωτότυπες ιατρικές εξετάσεις την ημέρα της επιτροπής.</div>
+        <div id="kepa" class="docs-list">
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-laptop-medical item-icon"></i><div class="item-content"><span class="item-title">Ηλεκτρονική Αίτηση</span><span class="item-note">Η αίτηση για ΚΕΠΑ γίνεται πλέον ψηφιακά</span></div></div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-hashtag item-icon"></i><div class="item-content"><span class="item-title">Αριθμός Πρωτοκόλλου</span><span class="item-note">Μετά την αίτηση θα σας κοινοποιήσουμε τον αριθμό</span></div></div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-user-doctor item-icon"></i><div class="item-content"><span class="item-title">Επικοινωνία με Ιατρούς</span><span class="item-note">Θα συμπληρώσουν τον εισηγητικό φάκελο ψηφιακά</span></div></div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-comment-sms item-icon"></i><div class="item-content"><span class="item-title">Ενημέρωση με SMS</span><span class="item-note">Θα λάβετε μήνυμα για την ημερομηνία της εξέτασης</span></div></div>
+            <div class="sos-note"><i class="fas fa-exclamation-triangle"></i><strong>ΠΡΟΣΟΧΗ:</strong> Φροντίστε να έχετε μαζί σας όλες τις πρωτότυπες ιατρικές εξετάσεις την ημέρα της επιτροπής.</div>
         </div>
     </div>
 
     <div class="footer-info">
         <h3>Στοιχεία Επικοινωνίας</h3>
         <div style="text-align: left; display: inline-block; margin-bottom: 15px;">
-            <p><i class="fas fa-map-marker-alt" style="color:var(--terracotta); width:20px"></i> Πατριάρχου Γρηγορίου Ε 10, Τρίπολη</p>
-            <p><i class="fas fa-envelope" style="color:var(--terracotta); width:20px"></i> sintaxi@taxisdp.gr</p>
-            <p><i class="fas fa-phone" style="color:var(--terracotta); width:20px"></i> 2710 224 939</p>
-            <p><i class="fas fa-mobile-alt" style="color:var(--terracotta); width:20px"></i> 6955 316 277</p>
+            <p><i class="fas fa-map-marker-alt" style="color:var(--terracotta); width:20px"></i>Πατριάρχου Γρηγορίου Ε 10, Τρίπολη</p>
+            <p><i class="fas fa-envelope" style="color:var(--terracotta); width:20px"></i>sintaxi@taxisdp.gr</p>
+            <p><i class="fas fa-phone" style="color:var(--terracotta); width:20px"></i>2710 224 939</p>
+            <p><i class="fas fa-mobile-alt" style="color:var(--terracotta); width:20px"></i>6955 316 277</p>
         </div>
-        <a href="viber://chat?number=%2B306955316277" class="btn-action btn-viber"><i class="fab fa-viber"></i>  &nbsp; ΜΗΝΥΜΑ ΣΤΟ VIBER</a>
-        <a href="mailto:sintaxi@taxisdp.gr" class="btn-action btn-email"><i class="fas fa-envelope"></i>&nbsp; ΑΠΟΣΤΟΛΗ EMAIL</a>
-        <a href="tel:6955316277" class="btn-action btn-call"><i class="fas fa-phone-alt"></i> &nbsp;  ΚΛΗΣΗ ΣΤΟ ΓΡΑΦΕΙΟ</a>
-        <a href="https://maps.app.goo.gl/fMJ6NYGDHn61NdSB8" target="_blank" class="btn-action btn-maps"><i class="fas fa-directions"></i>  &nbsp; ΟΔΗΓΙΕΣ ΣΤΟΥΣ ΧΑΡΤΕΣ</a>
+        <a href="viber://chat?number=%2B306955316277" class="btn-action btn-viber"><i class="fab fa-viber"></i>ΜΗΝΥΜΑ ΣΤΟ VIBER</a>
+        <a href="mailto:sintaxi@taxisdp.gr" class="btn-action btn-email"><i class="fas fa-envelope"></i>ΑΠΟΣΤΟΛΗ EMAIL</a>
+        <a href="tel:6955316277" class="btn-action btn-call"><i class="fas fa-phone-alt"></i>ΚΛΗΣΗ ΣΤΟ ΓΡΑΦΕΙΟ</a>
+        <a href="https://maps.app.goo.gl/fMJ6NYGDHn61NdSB8" target="_blank" class="btn-action btn-maps"><i class="fas fa-directions"></i>ΟΔΗΓΙΕΣ ΣΤΟΥΣ ΧΑΡΤΕΣ</a>
     </div>
 </div>
 
@@ -222,9 +198,7 @@
         const list = document.getElementById(listId);
         const card = document.getElementById(cardId);
         const allLists = document.querySelectorAll('.docs-list');
-        
         allLists.forEach(l => { if(l.id !== listId) l.style.display = 'none'; });
-
         if (list.style.display === "block") {
             list.style.display = "none";
         } else {
@@ -232,12 +206,10 @@
             setTimeout(() => { card.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 150);
         }
     }
-
     function toggleCheck(element) { 
         element.classList.toggle('checked'); 
         updateCardProgress(element.closest('.category-card'));
     }
-
     function updateCardProgress(card) {
         const total = card.querySelectorAll('.doc-item').length;
         if(total === 0) return;
