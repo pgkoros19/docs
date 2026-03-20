@@ -17,6 +17,9 @@
             --white: #ffffff;
             --text-dark: #333333;
             --text-light: #666666;
+            --viber-color: #7360f2;
+            --email-color: #34495e;
+            --maps-color: #4285F4;
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -86,7 +89,7 @@
         }
         
         .docs-list {
-            display: none; /* Κλειστό αρχικά */
+            display: none;
             padding: 0 20px 20px 20px;
             border-top: 1px solid #f5f5f5;
             background-color: #fafafa;
@@ -133,40 +136,55 @@
             margin-top: 0; 
             font-family: 'Noto Serif Greek', serif; 
             font-size: 1.3rem; 
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         
-        .contact-link {
+        .contact-details {
+            margin-bottom: 25px;
+            text-align: left;
+            display: inline-block;
+        }
+
+        .contact-link-text {
             display: flex;
             align-items: center;
-            justify-content: center;
             text-decoration: none;
             color: var(--text-dark);
-            margin: 12px 0;
+            margin: 10px 0;
             font-weight: 500;
+            font-size: 0.95rem;
         }
-        .contact-link i { 
+        .contact-link-text i { 
             color: var(--terracotta); 
             margin-right: 12px; 
             width: 20px;
+            text-align: center;
         }
         
-        .btn-call {
+        /* Buttons Styling */
+        .btn-action {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background-color: var(--terracotta);
             color: white !important;
-            padding: 18px 30px;
+            padding: 16px 20px;
             border-radius: 50px;
             margin-top: 10px;
             font-weight: 700;
             text-decoration: none;
             text-transform: uppercase;
             width: 100%;
+            font-size: 0.9rem;
+            transition: transform 0.2s;
         }
-        
-        /* Περιστροφή βέλους όταν είναι ενεργό */
+        .btn-action:active { transform: scale(0.98); }
+        .btn-action i { margin-right: 10px; font-size: 1.2rem; }
+
+        .btn-viber { background-color: var(--viber-color); box-shadow: 0 4px 10px rgba(115, 96, 242, 0.2); }
+        .btn-email { background-color: var(--email-color); box-shadow: 0 4px 10px rgba(52, 73, 94, 0.2); }
+        .btn-call { background-color: var(--terracotta); box-shadow: 0 4px 10px rgba(179, 90, 68, 0.2); }
+        .btn-maps { background-color: var(--maps-color); box-shadow: 0 4px 10px rgba(66, 133, 244, 0.2); }
+
         .category-card.active .category-header i { transform: rotate(180deg); }
     </style>
 </head>
@@ -323,12 +341,29 @@
 
     <div class="footer-info">
         <h3>Στοιχεία Επικοινωνίας</h3>
-        <div class="contact-link"><i class="fas fa-map-marker-alt"></i> Πατριάρχου Γρηγορίου Ε 10, Τρίπολη</div>
-        <div class="contact-link"><i class="fas fa-envelope"></i> sintaxi@taxisdp.gr</div>
-        <a href="tel:2710224939" class="contact-link"><i class="fas fa-phone"></i> 2710 224 939</a>
-        <a href="tel:6955316277" class="contact-link"><i class="fas fa-mobile-alt"></i> 6955 316 277</a>
         
-        <a href="tel:2710224939" class="btn-call"><i class="fas fa-calendar-alt"></i> ΚΛΗΣΗ ΓΙΑ ΡΑΝΤΕΒΟΥ</a>
+        <div class="contact-details">
+            <div class="contact-link-text"><i class="fas fa-map-marker-alt"></i> Πατριάρχου Γρηγορίου Ε 10, Τρίπολη</div>
+            <div class="contact-link-text"><i class="fas fa-envelope"></i> sintaxi@taxisdp.gr</div>
+            <div class="contact-link-text"><i class="fas fa-phone"></i> 2710 224 939 (Σταθερό)</div>
+            <div class="contact-link-text"><i class="fas fa-mobile-alt"></i> 6955 316 277 (Κινητό)</div>
+        </div>
+        
+        <a href="viber://chat?number=%2B306955316277" class="btn-action btn-viber">
+            <i class="fab fa-viber"></i> ΜΗΝΥΜΑ ΣΤΟ VIBER
+        </a>
+
+        <a href="mailto:sintaxi@taxisdp.gr" class="btn-action btn-email">
+            <i class="fas fa-envelope"></i> ΑΠΟΣΤΟΛΗ EMAIL
+        </a>
+
+        <a href="tel:6955316277" class="btn-action btn-call">
+            <i class="fas fa-phone-alt"></i> ΚΛΗΣΗ ΓΙΑ ΡΑΝΤΕΒΟΥ
+        </a>
+
+        <a href="http://googleusercontent.com/maps.google.com/3" target="_blank" class="btn-action btn-maps">
+            <i class="fas fa-map-marked-alt"></i> ΟΔΗΓΙΕΣ ΧΑΡΤΗ
+        </a>
     </div>
 
 </div>
@@ -340,30 +375,16 @@
         const allLists = document.querySelectorAll('.docs-list');
         const allCards = document.querySelectorAll('.category-card');
         
-        // 1. Κλείνουμε ΟΛΕΣ τις άλλες λίστες και αφαιρούμε το "active" class
-        allLists.forEach(l => { 
-            if(l.id !== listId) {
-                l.style.display = 'none'; 
-            }
-        });
-        allCards.forEach(c => { 
-            if(c.id !== cardId) {
-                c.classList.remove('active'); 
-            }
-        });
+        allLists.forEach(l => { if(l.id !== listId) l.style.display = 'none'; });
+        allCards.forEach(c => { if(c.id !== cardId) c.classList.remove('active'); });
 
-        // 2. Ανοιγοκλείνουμε την επιλεγμένη λίστα
         if (list.style.display === "block") {
             list.style.display = "none";
             card.classList.remove('active');
         } else {
             list.style.display = "block";
             card.classList.add('active');
-            
-            // 3. Αυτόματο scroll για να φανεί η αρχή της λίστας στο κινητό
-            setTimeout(() => { 
-                card.scrollIntoView({ behavior: 'smooth', block: 'start' }); 
-            }, 150);
+            setTimeout(() => { card.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 150);
         }
     }
 </script>
