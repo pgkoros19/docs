@@ -6,7 +6,7 @@
     <title>Δικαιολογητικά | Γκόρος Πέτρος</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Serif+Greek:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Greek:wght@700&display=swap" rel="stylesheet">
     
     <style>
         :root { 
@@ -20,6 +20,11 @@
             --viber-color: #7360f2;
             --email-color: #34495e;
             --maps-color: #4285F4;
+            
+            --color-1: #2980b9; /* Μπλε - Ραντεβού */
+            --color-2: #27ae60; /* Πράσινο - Γήρας */
+            --color-3: #8e44ad; /* Μωβ - Θάνατος */
+            --color-4: #d35400; /* Πορτοκαλί - Αναπηρία */
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -48,19 +53,19 @@
             background-color: var(--deep-charcoal);
             color: var(--white);
             border-bottom: 4px solid var(--terracotta);
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
-        .header h1 { 
-            font-family: 'Noto Serif Greek', serif; 
-            font-size: 1.6rem; 
-            margin: 0; 
-        }
-        .header p { 
-            font-size: 0.95rem; 
-            margin-top: 8px; 
-            opacity: 0.8; 
+        .header h1 { font-family: 'Noto Serif Greek', serif; font-size: 1.6rem; margin: 0; }
+        .header p { font-size: 0.95rem; margin-top: 8px; opacity: 0.8; }
+
+        .share-container { text-align: center; margin-bottom: 20px; }
+        .btn-share-viber {
+            display: inline-flex; align-items: center; justify-content: center;
+            background-color: var(--viber-color); color: white !important;
+            padding: 12px 24px; border-radius: 50px; font-weight: 600;
+            text-decoration: none; font-size: 0.85rem; box-shadow: 0 4px 10px rgba(115, 96, 242, 0.2);
         }
 
         .category-card {
@@ -70,122 +75,65 @@
             margin-bottom: 15px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.03);
             overflow: hidden;
+            border-left: 6px solid #ccc;
         }
         
+        .card-1 { border-left-color: var(--color-1); }
+        .card-1 .category-header i { color: var(--color-1); }
+        .card-1 .item-icon { color: var(--color-1) !important; }
+
+        .card-2 { border-left-color: var(--color-2); }
+        .card-2 .category-header i { color: var(--color-2); }
+        .card-2 .item-icon { color: var(--color-2) !important; }
+
+        .card-3 { border-left-color: var(--color-3); }
+        .card-3 .category-header i { color: var(--color-3); }
+        .card-3 .item-icon { color: var(--color-3) !important; }
+
+        .card-4 { border-left-color: var(--color-4); }
+        .card-4 .category-header i { color: var(--color-4); }
+        .card-4 .item-icon { color: var(--color-4) !important; }
+
         .category-header {
-            padding: 20px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            color: var(--deep-charcoal);
-        }
-        .category-header i { 
-            color: var(--terracotta); 
-            font-size: 1.1rem;
-            transition: transform 0.3s ease; 
+            padding: 20px; font-weight: 700; font-size: 1.1rem;
+            display: flex; justify-content: space-between; align-items: center;
+            cursor: pointer; color: var(--deep-charcoal);
         }
         
-        .docs-list {
-            display: none;
-            padding: 0 20px 20px 20px;
-            border-top: 1px solid #f5f5f5;
-            background-color: #fafafa;
-        }
+        .docs-list { display: none; padding: 0 20px 20px 20px; border-top: 1px solid #f5f5f5; background-color: #fafafa; }
         
-        .doc-item {
-            display: flex;
-            align-items: flex-start;
-            padding: 15px 0;
-            border-bottom: 1px solid #eee;
-            font-size: 0.98rem;
-        }
-        .doc-item:last-child { border-bottom: none; }
+        .doc-item { display: flex; align-items: flex-start; padding: 15px 0; border-bottom: 1px solid #eee; font-size: 0.98rem; cursor: pointer; }
+        .doc-item.checked { opacity: 0.4; }
+        .doc-item.checked .item-title { text-decoration: line-through; }
         
-        .doc-item i.item-icon { 
-            color: var(--terracotta); 
-            margin-right: 15px; 
-            margin-top: 3px; 
-            font-size: 1.1rem; 
-            width: 20px;
-            text-align: center;
-        }
-        
+        .doc-item i.item-icon { margin-right: 15px; margin-top: 3px; font-size: 1.1rem; width: 20px; text-align: center; }
         .item-content { flex: 1; }
         .item-title { font-weight: 600; color: #000; display: block; }
-        .item-note { 
-            font-size: 0.88rem; 
-            color: var(--text-light); 
-            font-style: italic; 
-            display: block; 
-            margin-top: 4px; 
-            line-height: 1.4;
+        .item-note { font-size: 0.88rem; color: var(--text-light); font-style: italic; display: block; margin-top: 4px; }
+
+        .sos-note {
+            background-color: #fff3cd; color: #856404; padding: 12px; border-radius: 8px;
+            margin-top: 15px; font-size: 0.85rem; border: 1px solid #ffeeba; display: flex; align-items: start;
         }
+        .sos-note i { margin-right: 10px; margin-top: 3px; }
 
         .footer-info {
-            background-color: var(--white);
-            padding: 30px 20px;
-            border-radius: 12px;
-            margin-top: 30px;
-            text-align: center;
-            border: 1px solid var(--border-color);
+            background-color: var(--white); padding: 30px 20px; border-radius: 12px;
+            margin-top: 30px; text-align: center; border: 1px solid var(--border-color);
         }
-        .footer-info h3 { 
-            margin-top: 0; 
-            font-family: 'Noto Serif Greek', serif; 
-            font-size: 1.3rem; 
-            margin-bottom: 15px;
-        }
+        .contact-details { margin-bottom: 25px; text-align: left; display: inline-block; }
+        .contact-link-text { display: flex; align-items: center; color: var(--text-dark); margin: 10px 0; font-weight: 500; font-size: 0.95rem; }
+        .contact-link-text i { color: var(--terracotta); margin-right: 12px; width: 20px; text-align: center; }
         
-        .contact-details {
-            margin-bottom: 25px;
-            text-align: left;
-            display: inline-block;
-        }
-
-        .contact-link-text {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: var(--text-dark);
-            margin: 10px 0;
-            font-weight: 500;
-            font-size: 0.95rem;
-        }
-        .contact-link-text i { 
-            color: var(--terracotta); 
-            margin-right: 12px; 
-            width: 20px;
-            text-align: center;
-        }
-        
-        /* Buttons Styling */
         .btn-action {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            color: white !important;
-            padding: 16px 20px;
-            border-radius: 50px;
-            margin-top: 10px;
-            font-weight: 700;
-            text-decoration: none;
-            text-transform: uppercase;
-            width: 100%;
-            font-size: 0.9rem;
-            transition: transform 0.2s;
+            display: inline-flex; align-items: center; justify-content: center; color: white !important;
+            padding: 16px 20px; border-radius: 50px; margin-top: 10px; font-weight: 700; text-decoration: none;
+            text-transform: uppercase; width: 100%; font-size: 0.9rem;
         }
-        .btn-action:active { transform: scale(0.98); }
-        .btn-action i { margin-right: 10px; font-size: 1.2rem; }
-
-        .btn-viber { background-color: var(--viber-color); box-shadow: 0 4px 10px rgba(115, 96, 242, 0.2); }
-        .btn-email { background-color: var(--email-color); box-shadow: 0 4px 10px rgba(52, 73, 94, 0.2); }
-        .btn-call { background-color: var(--terracotta); box-shadow: 0 4px 10px rgba(179, 90, 68, 0.2); }
-        .btn-maps { background-color: var(--maps-color); box-shadow: 0 4px 10px rgba(66, 133, 244, 0.2); }
-
-        .category-card.active .category-header i { transform: rotate(180deg); }
+        .btn-viber { background-color: var(--viber-color); }
+        .btn-email { background-color: var(--email-color); }
+        .btn-call { background-color: var(--terracotta); }
+        .btn-maps { background-color: var(--maps-color); }
     </style>
 </head>
 <body>
@@ -197,173 +145,81 @@
         <p>Γκόρος Πέτρος | Τρίπολη</p>
     </div>
 
-    <div class="category-card" id="card-ghratos">
+    <div class="share-container">
+        <a href="viber://forward?text=Δείτε εδώ συγκεντρωμένα τα δικαιολογητικά που χρειαζόμαστε: https://pgkoros19.github.io/docs/" class="btn-share-viber">
+            <i class="fab fa-viber"></i> ΑΠΟΣΤΟΛΗ ΣΕ ΣΥΓΓΕΝΗ
+        </a>
+    </div>
+
+    <div class="category-card card-1" id="card-first">
+        <div class="category-header" onclick="toggleDocs('first', 'card-first')">
+            <span>Απαραίτητα για το 1ο Ραντεβού</span> <i class="fas fa-calendar-check"></i>
+        </div>
+        <div id="first" class="docs-list">
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-key item-icon"></i><div class="item-content"><span class="item-title">Κωδικοί Taxisnet</span></div></div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-id-card item-icon"></i><div class="item-content"><span class="item-title">Αστυνομική Ταυτότητα</span></div></div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-book-medical item-icon"></i><div class="item-content"><span class="item-title">Ασφαλιστικά Βιβλιάρια ΟΑΕΕ</span><span class="item-note">Μέχρι το 2006</span></div></div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-copy item-icon"></i><div class="item-content"><span class="item-title">Καρτέλες Ενσήμων ΙΚΑ</span><span class="item-note">Μέχρι το 2001</span></div></div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-landmark item-icon"></i><div class="item-content"><span class="item-title">Για Δημόσιο: Πιστοποιητικό Υπηρεσιακών Μεταβολών</span></div></div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-file-invoice-dollar item-icon"></i><div class="item-content"><span class="item-title">Για Δημόσιο: Ανάλυση Ετήσιων Αποδοχών</span></div></div>
+        </div>
+    </div>
+
+    <div class="category-card card-2" id="card-ghratos">
         <div class="category-header" onclick="toggleDocs('ghratos', 'card-ghratos')">
-            Σύνταξη Γήρατος <i class="fas fa-chevron-down"></i>
+            <span>Σύνταξη Γήρατος</span> <i class="fas fa-user-clock"></i>
         </div>
         <div id="ghratos" class="docs-list">
-            <div class="doc-item">
-                <i class="fas fa-key item-icon"></i> 
-                <div class="item-content"><span class="item-title">Κωδικοί Taxisnet</span></div>
-            </div>
-            <div class="doc-item">
-                <i class="fas fa-id-card item-icon"></i> 
-                <div class="item-content">
-                    <span class="item-title">Αντίγραφο Ταυτότητας</span>
-                    <span class="item-note">(ή φωτογραφία και τις δύο όψεις)</span>
-                </div>
-            </div>
-            <div class="doc-item">
-                <i class="fas fa-university item-icon"></i> 
-                <div class="item-content">
-                    <span class="item-title">Βεβαίωση Λογαριασμού Τράπεζας</span>
-                    <span class="item-note">(φωτογραφία 1ης σελίδας βιβλιαρίου ή βεβαίωση e-banking με IBAN)</span>
-                </div>
-            </div>
-            <div class="doc-item">
-                <i class="fas fa-mobile-alt item-icon"></i> 
-                <div class="item-content">
-                    <span class="item-title">Εθνικό Μητρώο Επικοινωνίας (ΕΜΕΠ)</span>
-                    <span class="item-note">Δηλωμένο κινητό τηλέφωνο και email</span>
-                </div>
-            </div>
-            <div class="doc-item">
-                <i class="fas fa-home item-icon"></i> 
-                <div class="item-content"><span class="item-title">Βεβαίωση Μόνιμης Κατοικίας</span></div>
-            </div>
-            <div class="doc-item">
-                <i class="fas fa-user-tie item-icon"></i> 
-                <div class="item-content">
-                    <span class="item-title">Για άνδρες: Στρατολογική Κατάσταση</span>
-                    <span class="item-note">Πιστοποιητικό τύπου Α (από ΚΕΠ) ή Αριθμός Στρατιωτικού Μητρώου (Α.Σ.Μ.)</span>
-                </div>
-            </div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-key item-icon"></i><div class="item-content"><span class="item-title">Κωδικοί Taxisnet</span></div></div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-id-card item-icon"></i><div class="item-content"><span class="item-title">Αντίγραφο Ταυτότητας</span></div></div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-university item-icon"></i><div class="item-content"><span class="item-title">Λογαριασμός Τράπεζας (IBAN)</span></div></div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-mobile-alt item-icon"></i><div class="item-content"><span class="item-title">Εθνικό Μητρώο Επικοινωνίας (ΕΜΕΠ)</span></div></div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-home item-icon"></i><div class="item-content"><span class="item-title">Βεβαίωση Μόνιμης Κατοικίας</span></div></div>
+            <div class="sos-note"><i class="fas fa-camera"></i><div><strong>SOS για Φωτογραφίες:</strong> Βεβαιωθείτε ότι είναι καθαρές και φαίνονται και οι 4 γωνίες.</div></div>
         </div>
     </div>
 
-    <div class="category-card" id="card-thanatos">
+    <div class="category-card card-3" id="card-thanatos">
         <div class="category-header" onclick="toggleDocs('thanatos', 'card-thanatos')">
-            Σύνταξη Λόγω Θανάτου <i class="fas fa-chevron-down"></i>
+            <span>Σύνταξη Λόγω Θανάτου</span> <i class="fas fa-monument"></i>
         </div>
         <div id="thanatos" class="docs-list">
-            <div class="doc-item">
-                <i class="fas fa-user-shield item-icon"></i> 
-                <div class="item-content">
-                    <span class="item-title">Κωδικοί Taxisnet</span>
-                    <span class="item-note">Τόσο του θανόντος όσο και του δικαιοδόχου</span>
-                </div>
-            </div>
-            <div class="doc-item">
-                <i class="fas fa-id-card item-icon"></i> 
-                <div class="item-content">
-                    <span class="item-title">Αντίγραφο Ταυτότητας</span>
-                    <span class="item-note">(ή φωτογραφία και τις δύο όψεις)</span>
-                </div>
-            </div>
-            <div class="doc-item">
-                <i class="fas fa-university item-icon"></i> 
-                <div class="item-content">
-                    <span class="item-title">Βεβαίωση Λογαριασμού Τράπεζας</span>
-                    <span class="item-note">(φωτογραφία 1ης σελίδας βιβλιαρίου ή βεβαίωση e-banking)</span>
-                </div>
-            </div>
-            <div class="doc-item">
-                <i class="fas fa-mobile-alt item-icon"></i> 
-                <div class="item-content">
-                    <span class="item-title">Εθνικό Μητρώο Επικοινωνίας (ΕΜΕΠ)</span>
-                    <span class="item-note">Δηλωμένο κινητό τηλέφωνο και email</span>
-                </div>
-            </div>
-            <div class="doc-item">
-                <i class="fas fa-file-alt item-icon"></i> 
-                <div class="item-content"><span class="item-title">Ληξιαρχική Πράξη Θανάτου</span></div>
-            </div>
-            <div class="doc-item">
-                <i class="fas fa-file-invoice item-icon"></i> 
-                <div class="item-content">
-                    <span class="item-title">Πιστοποιητικό Εγγυτέρων Συγγενών</span>
-                    <span class="item-note">Πρέπει να έχει ήδη εκδοθεί</span>
-                </div>
-            </div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-user-shield item-icon"></i><div class="item-content"><span class="item-title">Κωδικοί Taxisnet</span><span class="item-note">Θανόντος & Δικαιοδόχου</span></div></div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-id-card item-icon"></i><div class="item-content"><span class="item-title">Αντίγραφο Ταυτότητας</span></div></div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-university item-icon"></i><div class="item-content"><span class="item-title">Λογαριασμός Τράπεζας (IBAN)</span></div></div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-mobile-alt item-icon"></i><div class="item-content"><span class="item-title">Εθνικό Μητρώο Επικοινωνίας (ΕΜΕΠ)</span></div></div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-file-alt item-icon"></i><div class="item-content"><span class="item-title">Ληξιαρχική Πράξη Θανάτου</span></div></div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-file-invoice item-icon"></i><div class="item-content"><span class="item-title">Πιστοποιητικό Εγγυτέρων Συγγενών</span></div></div>
+            <div class="sos-note"><i class="fas fa-camera"></i><div><strong>SOS για Φωτογραφίες:</strong> Βεβαιωθείτε ότι είναι καθαρές και φαίνονται και οι 4 γωνίες.</div></div>
         </div>
     </div>
 
-    <div class="category-card" id="card-anaphria">
+    <div class="category-card card-4" id="card-anaphria">
         <div class="category-header" onclick="toggleDocs('anaphria', 'card-anaphria')">
-            Σύνταξη Αναπηρίας / ΚΕΠΑ <i class="fas fa-chevron-down"></i>
+            <span>Σύνταξη Αναπηρίας / ΚΕΠΑ</span> <i class="fas fa-wheelchair"></i>
         </div>
         <div id="anaphria" class="docs-list">
-            <div class="doc-item">
-                <i class="fas fa-key item-icon"></i> 
-                <div class="item-content"><span class="item-title">Κωδικοί Taxisnet</span></div>
-            </div>
-            <div class="doc-item">
-                <i class="fas fa-id-card item-icon"></i> 
-                <div class="item-content">
-                    <span class="item-title">Αντίγραφο Ταυτότητας</span>
-                    <span class="item-note">(ή φωτογραφία και τις δύο όψεις)</span>
-                </div>
-            </div>
-            <div class="doc-item">
-                <i class="fas fa-university item-icon"></i> 
-                <div class="item-content">
-                    <span class="item-title">Βεβαίωση Λογαριασμού Τράπεζας</span>
-                    <span class="item-note">(φωτογραφία 1ης σελίδας βιβλιαρίου ή βεβαίωση e-banking)</span>
-                </div>
-            </div>
-            <div class="doc-item">
-                <i class="fas fa-mobile-alt item-icon"></i> 
-                <div class="item-content">
-                    <span class="item-title">Εθνικό Μητρώο Επικοινωνίας (ΕΜΕΠ)</span>
-                    <span class="item-note">Δηλωμένο κινητό τηλέφωνο και email</span>
-                </div>
-            </div>
-            <div class="doc-item">
-                <i class="fas fa-home item-icon"></i> 
-                <div class="item-content"><span class="item-title">Βεβαίωση Μόνιμης Κατοικίας</span></div>
-            </div>
-            <div class="doc-item">
-                <i class="fas fa-notes-medical item-icon" style="color:#d9534f"></i> 
-                <div class="item-content">
-                    <span class="item-title" style="color:#d9534f">Γνωμάτευση ΚΕΠΑ</span>
-                    <span class="item-note">Απαραίτητη για την πιστοποίηση αναπηρίας</span>
-                </div>
-            </div>
-            <div class="doc-item">
-                <i class="fas fa-user-tie item-icon"></i> 
-                <div class="item-content">
-                    <span class="item-title">Για άνδρες: Στρατολογική Κατάσταση</span>
-                    <span class="item-note">Πιστοποιητικό τύπου Α (από ΚΕΠ) ή Αριθμός Στρατιωτικού Μητρώου (Α.Σ.Μ.)</span>
-                </div>
-            </div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-key item-icon"></i><div class="item-content"><span class="item-title">Κωδικοί Taxisnet</span></div></div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-id-card item-icon"></i><div class="item-content"><span class="item-title">Αντίγραφο Ταυτότητας</span></div></div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-university item-icon"></i><div class="item-content"><span class="item-title">Λογαριασμός Τράπεζας (IBAN)</span></div></div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-mobile-alt item-icon"></i><div class="item-content"><span class="item-title">Εθνικό Μητρώο Επικοινωνίας (ΕΜΕΠ)</span></div></div>
+            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-notes-medical item-icon"></i><div class="item-content"><span class="item-title">Γνωμάτευση ΚΕΠΑ</span></div></div>
+            <div class="sos-note"><i class="fas fa-camera"></i><div><strong>SOS για Φωτογραφίες:</strong> Βεβαιωθείτε ότι είναι καθαρές και φαίνονται και οι 4 γωνίες.</div></div>
         </div>
     </div>
 
     <div class="footer-info">
         <h3>Στοιχεία Επικοινωνίας</h3>
-        
         <div class="contact-details">
             <div class="contact-link-text"><i class="fas fa-map-marker-alt"></i> Πατριάρχου Γρηγορίου Ε 10, Τρίπολη</div>
             <div class="contact-link-text"><i class="fas fa-envelope"></i> sintaxi@taxisdp.gr</div>
-            <div class="contact-link-text"><i class="fas fa-phone"></i> 2710 224 939 (Σταθερό)</div>
-            <div class="contact-link-text"><i class="fas fa-mobile-alt"></i> 6955 316 277 (Κινητό)</div>
+            <div class="contact-link-text"><i class="fas fa-phone"></i> 2710 224 939</div>
+            <div class="contact-link-text"><i class="fas fa-mobile-alt"></i> 6955 316 277</div>
         </div>
-        
-        <a href="viber://chat?number=%2B306955316277" class="btn-action btn-viber">
-            <i class="fab fa-viber"></i> ΜΗΝΥΜΑ ΣΤΟ VIBER
-        </a>
-
-        <a href="mailto:sintaxi@taxisdp.gr" class="btn-action btn-email">
-            <i class="fas fa-envelope"></i> ΑΠΟΣΤΟΛΗ EMAIL
-        </a>
-
-        <a href="tel:6955316277" class="btn-action btn-call">
-            <i class="fas fa-phone-alt"></i> ΚΛΗΣΗ ΓΙΑ ΡΑΝΤΕΒΟΥ
-        </a>
-
-        <a href="http://googleusercontent.com/maps.google.com/3" target="_blank" class="btn-action btn-maps">
-            <i class="fas fa-map-marked-alt"></i> ΟΔΗΓΙΕΣ ΧΑΡΤΗ
-        </a>
+        <a href="viber://chat?number=%2B306955316277" class="btn-action btn-viber"><i class="fab fa-viber"></i> ΜΗΝΥΜΑ ΣΤΟ VIBER</a>
+        <a href="mailto:sintaxi@taxisdp.gr" class="btn-action btn-email"><i class="fas fa-envelope"></i> ΑΠΟΣΤΟΛΗ EMAIL</a>
+        <a href="tel:6955316277" class="btn-action btn-call"><i class="fas fa-phone-alt"></i> ΚΛΗΣΗ ΓΙΑ ΡΑΝΤΕΒΟΥ</a>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=37.5115,22.3725" target="_blank" class="btn-action btn-maps"><i class="fas fa-map-marked-alt"></i> ΟΔΗΓΙΕΣ ΧΑΡΤΗ</a>
     </div>
 
 </div>
@@ -387,6 +243,7 @@
             setTimeout(() => { card.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 150);
         }
     }
+    function toggleCheck(element) { element.classList.toggle('checked'); }
 </script>
 
 </body>
