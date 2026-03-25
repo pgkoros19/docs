@@ -3,221 +3,338 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Γκόρος Πέτρος | Fast Track Assistant</title>
+    <title>Λίστα Δικαιολογητικών | Πέτρος Γκόρος</title>
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Greek:wght@700&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#1a1f24">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
     
     <style>
-        :root { 
-            --deep-charcoal: #222222;
-            --terracotta: #b35a44;
-            --soft-grey: #f4f4f4;
-            --border-color: #e0e0e0;
+        :root {
+            --accent: #b35a44;
+            --dark: #1a1f24;
             --white: #ffffff;
-            --text-dark: #333333;
-            --text-light: #666666;
-            --viber-color: #7360f2;
-            --email-color: #34495e;
-            --maps-color: #4285F4;
-            --color-1: #2980b9; --color-2: #27ae60; --color-3: #8e44ad; --color-4: #d35400; --color-5: #2c3e50; --color-6: #7f8c8d;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --glass-bg: rgba(255, 255, 255, 0.8);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.4);
+            --blur: blur(12px);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #f1f5f9;
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 20px 20px;
+            margin: 0; padding: 0; 
+            display: flex; justify-content: center; 
+            color: var(--text-main); -webkit-font-smoothing: antialiased; 
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--soft-grey); margin: 0; padding: 0; color: var(--text-dark); line-height: 1.6; overflow-x: hidden; }
 
-        .main-container { width: 100%; max-width: 600px; margin: 0 auto; padding: 15px; padding-bottom: 30px; }
+        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in-up { opacity: 0; animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
-        .header { text-align: center; padding: 30px 20px; background-color: var(--deep-charcoal); color: var(--white); border-bottom: 4px solid var(--terracotta); margin-bottom: 20px; border-radius: 12px; }
-        .header h1 { font-family: 'Noto Serif Greek', serif; font-size: 1.6rem; margin: 0; }
-
-        .share-container { text-align: center; margin-bottom: 20px; }
-        .btn-small { display: inline-flex; align-items: center; justify-content: center; background-color: var(--viber-color); color: white !important; padding: 12px 25px; border-radius: 50px; font-weight: 600; text-decoration: none; font-size: 0.85rem; }
-        .btn-small i { margin-right: 8px; }
-
-        .category-card { background-color: var(--white); border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 15px; border-left: 6px solid #ccc; overflow: hidden; }
-        .card-1 { border-left-color: var(--color-1); }
-        .card-2 { border-left-color: var(--color-2); }
-        .card-3 { border-left-color: var(--color-3); }
-        .card-4 { border-left-color: var(--color-4); }
-        .card-5 { border-left-color: var(--color-5); }
-        .card-6 { border-left-color: var(--color-6); }
-
-        .category-header { padding: 20px; font-weight: 700; font-size: 1.1rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
-
-        .card-progress { height: 4px; background: #eee; width: 100%; }
-        .card-progress-fill { height: 100%; width: 0%; background: var(--color-2); transition: width 0.3s ease; }
+        .app-shell { width: 100%; max-width: 550px; min-height: 100vh; display: flex; flex-direction: column; position: relative; }
         
-        .docs-list { display: none; padding: 0 20px 20px 20px; background-color: #fafafa; }
-        .doc-item { display: flex; align-items: flex-start; padding: 15px 0; border-bottom: 1px solid #eee; cursor: pointer; }
-        .doc-item:last-child { border-bottom: none; }
-        .doc-item.checked { opacity: 0.5; }
-        .doc-item.checked .item-title { text-decoration: line-through; }
+        .app-header { 
+            position: relative; padding: 50px 25px 40px; text-align: center; z-index: 10;
+            background: linear-gradient(-45deg, #1a1f24, #2d3741, #3b1f18, #1a1f24);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            border-radius: 0 0 35px 35px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            margin-bottom: 20px;
+        }
+
+        .logo-area { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; }
+        .logo-img { width: 100px; height: 100px; object-fit: contain; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3)); }
         
-        .item-icon { margin-right: 15px; margin-top: 3px; font-size: 1.1rem; width: 20px; text-align: center; }
-        .card-1 .item-icon { color: var(--color-1); } .card-2 .item-icon { color: var(--color-2); } 
-        .card-3 .item-icon { color: var(--color-3); } .card-4 .item-icon { color: var(--color-4); } 
-        .card-5 .item-icon { color: var(--color-5); } .card-6 .item-icon { color: var(--color-6); }
+        .app-header h1 { font-family: 'Playfair Display', serif; margin: 10px 0 0; font-size: 2.2rem; font-weight: 800; color: var(--white); }
+        .app-header p { margin: 4px 0 0; color: #e2e8f0; font-size: 1.1rem; opacity: 0.9;}
 
-        .item-content { flex: 1; min-width: 0; }
-        .item-title { font-weight: 600; color: #000; display: block; }
-        .item-note { font-size: 0.88rem; color: var(--text-light); font-style: italic; display: block; margin-top: 4px; }
-        .item-note code { background: #eee; padding: 2px 4px; border-radius: 4px; font-family: monospace; font-weight: bold; font-style: normal; color: #c0392b; }
+        .dynamic-greeting { 
+            color: rgba(255,255,255,0.9); line-height: 1.4; margin-top: 20px; font-size: 0.85rem;
+            background: rgba(0,0,0,0.2); padding: 12px 20px; border-radius: 18px; display: inline-block; 
+            backdrop-filter: var(--blur); border: 1px solid rgba(255,255,255,0.1);
+        }
 
-        .sos-note { background-color: #fff3cd; color: #856404; padding: 12px; border-radius: 8px; margin-top: 15px; font-size: 0.85rem; border: 1px solid #ffeeba; display: flex; align-items: center; }
-        .sos-note i { margin-right: 10px; }
+        .main-content { padding: 0 15px 40px; position: relative; z-index: 1; }
+        .section-label { padding: 20px 10px 10px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); font-weight: 800; display: flex; align-items: center; gap: 10px; }
+        .section-label::after { content: ''; flex-grow: 1; height: 1px; background: rgba(179, 90, 68, 0.15); }
 
-        .footer-info { background-color: var(--white); padding: 30px 20px; border-radius: 12px; margin-top: 30px; text-align: center; border: 1px solid var(--border-color); }
-        .btn-action { display: inline-flex; align-items: center; justify-content: center; color: white !important; padding: 16px 20px; border-radius: 50px; margin-top: 10px; font-weight: 700; text-decoration: none; width: 100%; font-size: 0.9rem; }
-        .btn-action i { margin-right: 10px; }
-        .btn-viber { background-color: var(--viber-color); } 
-        .btn-email { background-color: var(--email-color); }
-        .btn-call { background-color: var(--terracotta); }
-        .btn-maps { background-color: var(--maps-color); }
+        .category-card { 
+            background: var(--glass-bg); backdrop-filter: var(--blur); border: var(--glass-border); border-radius: 22px; 
+            margin-bottom: 16px; overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition);
+        }
+        
+        .category-header { padding: 20px; font-weight: 700; font-size: 1.1rem; color: var(--dark); display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+        .header-title-group { display: flex; align-items: center; gap: 12px; }
+        .card-icon { width: 42px; height: 42px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+        .chevron-icon { color: var(--text-muted); font-size: 0.9rem; transition: transform 0.3s; }
+        .category-card.open .chevron-icon { transform: rotate(180deg); }
+
+        .icon-blue { color: #0284c7; background: #e0f2fe; } 
+        .icon-green { color: #16a34a; background: #dcfce7; } 
+        .icon-red { color: #dc2626; background: #fee2e2; } 
+        .icon-orange { color: #d97706; background: #fef3c7; } 
+        .icon-purple { color: #7c3aed; background: #ede9fe; } 
+        .icon-gray { color: #475569; background: #f1f5f9; }
+
+        .card-progress { height: 4px; background: rgba(226, 232, 240, 0.6); width: 100%; }
+        .card-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #34d399, #10b981); transition: width 0.4s; }
+
+        .docs-list { display: none; padding: 10px 20px 25px; border-top: 1px solid rgba(226, 232, 240, 0.4); }
+        .doc-item { display: flex; align-items: flex-start; padding: 16px 0; border-bottom: 1px solid rgba(226, 232, 240, 0.6); cursor: pointer; }
+        .doc-item.checked { opacity: 0.6; }
+        .doc-item.checked .item-title { text-decoration: line-through; color: var(--text-muted); }
+        .doc-item.checked .item-icon { color: #10b981; }
+        
+        .item-icon { margin-right: 15px; margin-top: 3px; font-size: 1.25rem; color: #cbd5e1; }
+        .item-content { flex: 1; }
+        .item-title { font-weight: 700; color: var(--dark); display: block; font-size: 0.95rem; }
+        .item-note { font-size: 0.8rem; color: var(--text-muted); display: block; margin-top: 4px; line-height: 1.5; }
+
+        .sos-box { background: #fef2f2; border-left: 4px solid #ef4444; padding: 18px; border-radius: 0 15px 15px 0; margin-top: 20px; color: #b91c1c; font-size: 0.85rem; line-height: 1.5; }
+        .sos-box strong { color: #991b1b; display: block; margin-bottom: 4px; font-weight: 800; }
+        
+        .info-box { background: #f8fafc; padding: 15px; border-radius: 14px; font-size: 0.8rem; color: var(--text-main); margin-top: 15px; text-align: center; border: 1px dashed #cbd5e1; }
+        .info-box strong { color: var(--accent); font-family: monospace; font-size: 0.95rem; display: block; margin-top: 6px; }
+
+        .copy-section { margin-bottom: 30px; padding: 25px; background: var(--white); border-radius: 22px; box-shadow: var(--shadow-sm); position: relative; overflow: hidden;}
+        .btn-copy { width: 100%; background: linear-gradient(135deg, #c46b54, #b35a44); color: white; border: none; padding: 16px; border-radius: 15px; font-weight: 700; margin-top: 20px; cursor: pointer; transition: var(--transition); box-shadow: 0 4px 15px rgba(179, 90, 68, 0.3); }
+
+        /* --- BEAUTIFIED CONTACT BUTTONS --- */
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+        .contact-btn { 
+            background: var(--white); padding: 20px 15px; border-radius: 20px; 
+            display: flex; flex-direction: column; align-items: center; gap: 10px; 
+            text-decoration: none; color: var(--dark); font-weight: 700; font-size: 0.85rem;
+            box-shadow: var(--shadow-sm); border: 1px solid var(--glass-border); transition: var(--transition);
+        }
+        .contact-btn:active { transform: scale(0.96); background: #f8fafc; }
+        .contact-btn i { font-size: 1.5rem; }
+        
+        .btn-full { grid-column: span 2; flex-direction: row; justify-content: center; padding: 18px; background: var(--dark); color: white; border: none; }
+        .btn-full i { font-size: 1.2rem; }
+        
+        .c-maps { color: #4285F4; } .c-viber { color: #7360f2; } .c-call { color: var(--accent); } .c-calendar { color: #f59e0b; }
+
+        .app-footer { background: #1a1f24; padding: 45px 25px; text-align: center; color: white; border-radius: 35px 35px 0 0; }
+        .fc-item { display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 0.85rem; color: #cbd5e1; margin-bottom: 12px; }
+        
+        #toast { visibility: hidden; min-width: 250px; background-color: #10b981; color: #fff; text-align: center; border-radius: 50px; padding: 16px 24px; position: fixed; z-index: 9999; left: 50%; top: 20px; transform: translateX(-50%) translateY(-50px); font-size: 0.9rem; font-weight: 600; opacity: 0; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1); display: flex; align-items: center; gap: 10px; justify-content: center; }
+        #toast.show { visibility: visible; opacity: 1; transform: translateX(-50%) translateY(0); }
     </style>
 </head>
 <body>
 
-<div class="main-container">
+<div id="toast"><i class="fas fa-check-circle"></i> <span id="toastMsg">Αντιγράφηκε!</span></div>
 
-    <div class="header">
-        <h1>Οδηγίες & Δικαιολογητικά</h1>
-        <p>Διεκπεραίωση Συνταξιοδοτικών Υποθέσεων</p>
-        <p>Γκόρος Πέτρος</p>
+<div class="app-shell">
+    
+    <header class="app-header">
+        <div class="logo-area">
+            <img src="icon-512.png" alt="Logo" class="logo-img">
+            <div class="titles">
+                <h1>Λίστα Εγγράφων</h1>
+                <p>Γκόρος Πέτρος</p>
+                <div id="greetingText" class="dynamic-greeting"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-content">
+        
+        <div id="checklist-section-label" class="section-label fade-in-up">Checklist Δικαιολογητικών</div>
+
+        <div class="category-card fade-in-up" id="card-rantevou">
+            <div class="category-header" onclick="toggleDocs('rantevou', 'card-rantevou')">
+                <div class="header-title-group"><div class="card-icon icon-blue"><i class="fas fa-handshake"></i></div><span>1ο Ραντεβού</span></div>
+                <i class="fas fa-chevron-down chevron-icon"></i>
+            </div>
+            <div class="card-progress"><div class="card-progress-fill"></div></div>
+            <div id="rantevou" class="docs-list">
+                <div class="doc-item" onclick="toggleCheck(this)"><i class="far fa-circle item-icon"></i><div class="item-content"><span class="item-title">Κωδικοί Taxisnet</span></div></div>
+                <div class="doc-item" onclick="toggleCheck(this)"><i class="far fa-circle item-icon"></i><div class="item-content"><span class="item-title">Αστυνομική Ταυτότητα</span><span class="item-note">Φωτοτυπία ή καθαρές φωτογραφίες</span></div></div>
+                <div class="doc-item" onclick="toggleCheck(this)"><i class="far fa-circle item-icon"></i><div class="item-content"><span class="item-title">Ασφαλιστικά Βιβλιάρια ΟΑΕΕ</span><span class="item-note">Μέχρι το 2006 (αν υπήρχε χρόνος)</span></div></div>
+                <div class="doc-item" onclick="toggleCheck(this)"><i class="far fa-circle item-icon"></i><div class="item-content"><span class="item-title">Καρτέλες Ενσήμων ΙΚΑ</span><span class="item-note">Μέχρι το 2001 (αν υπήρχε χρόνος)</span></div></div>
+                <div class="doc-item" onclick="toggleCheck(this)"><i class="far fa-circle item-icon"></i><div class="item-content"><span class="item-title">Πιστοποιητικό Υπηρεσιακών Μεταβολών</span><span class="item-note">Μόνο για Δημόσιο.</span></div></div>
+                <div class="doc-item" onclick="toggleCheck(this)"><i class="far fa-circle item-icon"></i><div class="item-content"><span class="item-title">Ανάλυση Ετήσιων Αποδοχών από 2002</span><span class="item-note">Μόνο για Δημόσιο.</span></div></div>
+            </div>
+        </div>
+
+        <div class="category-card fade-in-up" id="card-giratos">
+            <div class="category-header" onclick="toggleDocs('giratos', 'card-giratos')">
+                <div class="header-title-group"><div class="card-icon icon-green"><i class="fas fa-user-check"></i></div><span>Σύνταξη Γήρατος</span></div>
+                <i class="fas fa-chevron-down chevron-icon"></i>
+            </div>
+            <div class="card-progress"><div class="card-progress-fill"></div></div>
+            <div id="giratos" class="docs-list">
+                <div class="doc-item" onclick="toggleCheck(this)"><i class="far fa-circle item-icon"></i><div class="item-content"><span class="item-title">Κωδικοί Taxisnet</span></div></div>
+                <div class="doc-item" onclick="toggleCheck(this)"><i class="far fa-circle item-icon"></i><div class="item-content"><span class="item-title">Αστυνομική Ταυτότητα</span><span class="item-note">Φωτοτυπία ή καθαρές φωτογραφίες</span></div></div>
+                <div class="doc-item" onclick="toggleCheck(this)"><i class="far fa-circle item-icon"></i><div class="item-content"><span class="item-title">Λογαριασμός Τράπεζας (IBAN)</span><span class="item-note">Φωτοτυπία 1ης σελίδας βιβλιαρίου ή Βεβαίωση e-banking</span></div></div>
+                <div class="doc-item" onclick="toggleCheck(this)"><i class="far fa-circle item-icon"></i><div class="item-content"><span class="item-title">Εθνικό Μητρώο Επικοινωνίας (ΕΜΕΠ)</span><span class="item-note">Πιστοποιημένο κινητό και e-mail</span></div></div>
+                <div class="doc-item" onclick="toggleCheck(this)"><i class="far fa-circle item-icon"></i><div class="item-content"><span class="item-title">Βεβαίωση Μόνιμης Κατοικίας</span></div></div>
+                <div class="doc-item" onclick="toggleCheck(this)"><i class="far fa-circle item-icon"></i><div class="item-content"><span class="item-title">Πιστοποιητικό Στρατολογικής Κατάστασης Τύπου Α'</span><span class="item-note">Μόνο για άνδρες σε περίπτωση εξαγοράς</span></div></div>
+                <div class="sos-box"><strong>Προσοχή στις φωτογραφίες</strong>Βεβαιωθείτε ότι οι φωτό είναι καθαρές, χωρίς γυαλάδες και φαίνονται οι 4 γωνίες.</div>
+            </div>
+        </div>
+
+        <div class="category-card fade-in-up" id="card-thanatou">
+            <div class="category-header" onclick="toggleDocs('thanatou', 'card-thanatou')">
+                <div class="header-title-group"><div class="card-icon icon-red"><i class="fas fa-heart-crack"></i></div><span>Σύνταξη Λόγω Θανάτου</span></div>
+                <i class="fas fa-chevron-down chevron-icon"></i>
+            </div>
+            <div class="card-progress"><div class="card-progress-fill"></div></div>
+            <div id="thanatou" class="docs-list">
+                <div class="doc-item" onclick="toggleCheck(this)"><i class="far fa-circle item-icon"></i><div class="item-content"><span class="item-title">Κωδικοί Taxisnet</span><span class="item-note">Θανόντος & Δικαιοδόχου</span></div></div>
+                <div class="doc-item" onclick="toggleCheck(this)"><i class="far fa-circle item-icon"></i><div class="item-content"><span class="item-title">Αστυνομική Ταυτότητα</span><span class="item-note">Φωτοτυπία ή καθαρές φωτογραφίες</span></div></div>
+                <div class="doc-item" onclick="toggleCheck(this)"><i class="far fa-circle item-icon"></i><div class="item-content"><span class="item-title">Λογαριασμός Τράπεζας (IBAN)</span></div></div>
+                <div class="doc-item" onclick="toggleCheck(this)"><i class="far fa-circle item-icon"></i><div class="item-content"><span class="item-title">Ληξιαρχική Πράξη Θανάτου</span><span class="item-note">Να έχει εκδοθεί</span></div></div>
+                <div class="doc-item" onclick="toggleCheck(this)"><i class="far fa-circle item-icon"></i><div class="item-content"><span class="item-title">Πιστοποιητικό Εγγυτέρων Συγγενών</span><span class="item-note">Να έχει εκδοθεί</span></div></div>
+            </div>
+        </div>
+
+        <div class="category-card fade-in-up" id="card-anapirias">
+            <div class="category-header" onclick="toggleDocs('anapirias', 'card-anapirias')">
+                <div class="header-title-group"><div class="card-icon icon-orange"><i class="fas fa-wheelchair"></i></div><span>Σύνταξη Αναπηρίας</span></div>
+                <i class="fas fa-chevron-down chevron-icon"></i>
+            </div>
+            <div class="card-progress"><div class="card-progress-fill"></div></div>
+            <div id="anapirias" class="docs-list">
+                <div class="doc-item" onclick="toggleCheck(this)"><i class="far fa-circle item-icon"></i><div class="item-content"><span class="item-title">Κωδικοί Taxisnet</span></div></div>
+                <div class="doc-item" onclick="toggleCheck(this)"><i class="far fa-circle item-icon"></i><div class="item-content"><span class="item-title">Αστυνομική Ταυτότητα</span></div></div>
+                <div class="doc-item" onclick="toggleCheck(this)"><i class="far fa-circle item-icon"></i><div class="item-content"><span class="item-title">Λογαριασμός Τράπεζας (IBAN)</span></div></div>
+                <div class="doc-item" onclick="toggleCheck(this)"><i class="far fa-circle item-icon"></i><div class="item-content"><span class="item-title">Εθνικό Μητρώο Επικοινωνίας (ΕΜΕΠ)</span></div></div>
+                <div class="doc-item" onclick="toggleCheck(this)"><i class="far fa-circle item-icon"></i><div class="item-content"><span class="item-title">Γνωμάτευση ΚΕΠΑ</span><span class="item-note">Ακολουθήστε τις οδηγίες παρακάτω.</span></div></div>
+            </div>
+        </div>
+
+        <div class="section-label fade-in-up">Οδηγοί & Πιστοποίηση</div>
+
+        <div class="category-card fade-in-up" id="card-kepa">
+            <div class="category-header" onclick="toggleDocs('kepa', 'card-kepa')">
+                <div class="header-title-group"><div class="card-icon icon-purple"><i class="fas fa-notes-medical"></i></div><span>Οδηγίες για ΚΕΠΑ</span></div>
+                <i class="fas fa-chevron-down chevron-icon"></i>
+            </div>
+            <div id="kepa" class="docs-list">
+                <div class="doc-item"><i class="fas fa-info-circle item-icon" style="color:var(--purple)"></i><div class="item-content"><span class="item-title">Ηλεκτρονική Αίτηση</span><span class="item-note">Γίνεται πλέον ψηφιακά από το γραφείο μας.</span></div></div>
+                <div class="doc-item"><i class="fas fa-info-circle item-icon" style="color:var(--purple)"></i><div class="item-content"><span class="item-title">Επικοινωνία με Ιατρούς</span><span class="item-note">Θα συμπληρώσουν τον εισηγητικό φάκελο ψηφιακά.</span></div></div>
+                <div class="sos-box" style="background:#e0f2fe; border-left-color:#0ea5e9; color:#0369a1;"><strong>Ημέρα Επιτροπής</strong>Έχετε μαζί σας όλες τις πρωτότυπες εξετάσεις.</div>
+            </div>
+        </div>
+
+        <div class="category-card fade-in-up" id="card-kep">
+            <div class="category-header" onclick="toggleDocs('kep', 'card-kep')">
+                <div class="header-title-group"><div class="card-icon icon-gray"><i class="fas fa-mobile-screen"></i></div><span>Πιστοποίηση ΕΜΕΠ</span></div>
+                <i class="fas fa-chevron-down chevron-icon"></i>
+            </div>
+            <div id="kep" class="docs-list">
+                <div class="doc-item"><i class="fas fa-check item-icon"></i><div class="item-content"><span class="item-title">Κινητό στο όνομά σας</span></div></div>
+                <div class="doc-item"><i class="fas fa-check item-icon"></i><div class="item-content"><span class="item-title">Επίσκεψη στο ΚΕΠ</span><span class="item-note">Με ταυτότητα και το κινητό σας</span></div></div>
+                <div class="info-box">Email γραφείου για δήλωση: <strong>sintaxi+το_ονοματεπώνυμό_σας@taxisdp.gr</strong></div>
+            </div>
+        </div>
+
+        <div class="section-label fade-in-up">Εξουσιοδότηση</div>
+        <div class="copy-section fade-in-up">
+            <p id="authText">Εξουσιοδοτώ τον Πέτρο Γκόρο του Κωνσταντίνου, με ΑΔΤ ΑΖ724619, όπως ενεργήσει αντί εμού κάθε απαραίτητη ενέργεια για τη διεκπεραίωση υπόθεσής μου.</p>
+            <button class="btn-copy" onclick="copyText()"><i class="fas fa-copy"></i> ΑΝΤΙΓΡΑΦΗ ΚΕΙΜΕΝΟΥ</button>
+        </div>
+
+        <div class="section-label fade-in-up">Επικοινωνία & Πρόσβαση</div>
+        
+        <div class="contact-grid fade-in-up">
+            <a href="http://maps.google.com/?q=Πατριάρχου Γρηγορίου Ε 10, Τρίπολη" target="_blank" class="contact-btn btn-full">
+                <i class="fas fa-map-marked-alt c-maps"></i> Πλοήγηση στο Γραφείο
+            </a>
+            <a href="https://calendar.app.google/uyssxHBnhQHURkA89" target="_blank" class="contact-btn">
+                <i class="fas fa-calendar-alt c-calendar"></i> Ραντεβού
+            </a>
+            <a href="viber://chat?number=%2B306955316277" class="contact-btn">
+                <i class="fab fa-viber c-viber"></i> Viber
+            </a>
+            <a href="tel:6955316277" class="contact-btn">
+                <i class="fas fa-phone-alt c-call"></i> Κλήση
+            </a>
+            <a href="mailto:sintaxi@taxisdp.gr" class="contact-btn">
+                <i class="fas fa-envelope"></i> Email
+            </a>
+        </div>
     </div>
 
-    <div class="share-container">
-        <a href="viber://forward?text=Δείτε εδώ τα δικαιολογητικά: https://pgkoros19.github.io/docs/" class="btn-small"><i class="fab fa-viber"></i>ΑΠΟΣΤΟΛΗ ΛΙΣΤΑΣ ΣΕ ΕΠΑΦΗ</a>
-    </div>
-
-    <div class="category-card card-1" id="card-first">
-        <div class="category-header" onclick="toggleDocs('first', 'card-first')">
-            <span>Απαραίτητα για το 1ο Ραντεβού</span> <i class="fas fa-calendar-check"></i>
-        </div>
-        <div class="card-progress"><div class="card-progress-fill"></div></div>
-        <div id="first" class="docs-list">
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-key item-icon"></i><div class="item-content"><span class="item-title">Κωδικοί Taxisnet</span></div></div>
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-id-card item-icon"></i><div class="item-content"><span class="item-title">Αστυνομική Ταυτότητα</span><span class="item-note">Αντίγραφο ή καθαρές φωτογραφίες</span></div></div>
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-book-medical item-icon"></i><div class="item-content"><span class="item-title">Ασφαλιστικά Βιβλιάρια ΟΑΕΕ</span><span class="item-note">Μέχρι το 2006 αν υπήρχε χρόνος</span></div></div>
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-copy item-icon"></i><div class="item-content"><span class="item-title">Καρτέλες Ενσήμων ΙΚΑ</span><span class="item-note">Μέχρι το 2001 αν υπήρχε χρόνος</span></div></div>
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-landmark item-icon"></i><div class="item-content"><span class="item-title">Για Δημόσιο: Πιστοποιητικό Υπηρεσιακών Μεταβολών</span></div></div>
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-file-invoice-dollar item-icon"></i><div class="item-content"><span class="item-title">Για Δημόσιο: Ανάλυση Ετήσιων Αποδοχών</span><span class="item-note">Πίνακας από το 2002 ή από την ημερομημία διορισμού</span></div></div>
-        </div>
-    </div>
-
-    <div class="category-card card-2" id="card-ghratos">
-        <div class="category-header" onclick="toggleDocs('ghratos', 'card-ghratos')">
-            <span>Σύνταξη Γήρατος</span> <i class="fas fa-user-clock"></i>
-        </div>
-        <div class="card-progress"><div class="card-progress-fill"></div></div>
-        <div id="ghratos" class="docs-list">
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-key item-icon"></i><div class="item-content"><span class="item-title">Κωδικοί Taxisnet</span></div></div>
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-id-card item-icon"></i><div class="item-content"><span class="item-title">Αντίγραφο Ταυτότητας</span><span class="item-note">Αντίγραφο ή καθαρές φωτογραφίες</span></div></div>
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-university item-icon"></i><div class="item-content"><span class="item-title">Λογαριασμός Τράπεζας (IBAN)</span><span class="item-note">Βεβαίωση e-banking ή φωτοτυπία 1ης σελίδας βιβλιαρίου</span></div></div>
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-mobile-alt item-icon"></i><div class="item-content"><span class="item-title">Εθνικό Μητρώο Επικοινωνίας (ΕΜΕΠ)</span><span class="item-note">Προϋπόθεση για την υποβολή ηλεκτρονικής αίτησης</span></div></div>
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-home item-icon"></i><div class="item-content"><span class="item-title">Βεβαίωση Μόνιμης Κατοικίας</span></div></div>
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-user-shield item-icon"></i><div class="item-content"><span class="item-title">Για άνδρες: Πιστοποιητικό Στρατολογικής Κατάστασης</span><span class="item-note">Τύπου Α' (για εξαγορά πλασματικών ετών)</span></div></div>
-            <div class="sos-note"><i class="fas fa-camera"></i><strong>SOS:</strong> Βεβαιωθείτε ότι οι φωτογραφίες είναι καθαρές και φαίνονται οι 4 γωνίες.</div>
-        </div>
-    </div>
-
-    <div class="category-card card-3" id="card-thanatos">
-        <div class="category-header" onclick="toggleDocs('thanatos', 'card-thanatos')">
-            <span>Σύνταξη Λόγω Θανάτου</span> <i class="fas fa-monument"></i>
-        </div>
-        <div class="card-progress"><div class="card-progress-fill"></div></div>
-        <div id="thanatos" class="docs-list">
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-user-shield item-icon"></i><div class="item-content"><span class="item-title">Κωδικοί Taxisnet</span><span class="item-note">Θανόντος & Δικαιοδόχου</span></div></div>
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-id-card item-icon"></i><div class="item-content"><span class="item-title">Αντίγραφο Ταυτότητας</span><span class="item-note">Αντίγραφο ή καθαρές φωτογραφίες</span></div></div>
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-university item-icon"></i><div class="item-content"><span class="item-title">Λογαριασμός Τράπεζας (IBAN)</span><span class="item-note">Βεβαίωση e-banking ή φωτοτυπία 1ης σελίδας βιβλιαρίου</span></div></div>
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-mobile-alt item-icon"></i><div class="item-content"><span class="item-title">Εθνικό Μητρώο Επικοινωνίας (ΕΜΕΠ)</span><span class="item-note">Προϋπόθεση για την υποβολή ηλεκτρονικής αίτησης</span></div></div>
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-file-alt item-icon"></i><div class="item-content"><span class="item-title">Ληξιαρχική Πράξη Θανάτου</span><span class="item-note">Να έχει εκδοθεί</span></div></div>
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-file-invoice item-icon"></i><div class="item-content"><span class="item-title">Πιστοποιητικό Εγγυτέρων Συγγενών</span><span class="item-note">Να έχει εκδοθεί</span></div></div>
-        </div>
-    </div>
-
-    <div class="category-card card-4" id="card-anaphria">
-        <div class="category-header" onclick="toggleDocs('anaphria', 'card-anaphria')">
-            <span>Σύνταξη Αναπηρίας</span> <i class="fas fa-wheelchair"></i>
-        </div>
-        <div class="card-progress"><div class="card-progress-fill"></div></div>
-        <div id="anaphria" class="docs-list">
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-key item-icon"></i><div class="item-content"><span class="item-title">Κωδικοί Taxisnet</span></div></div>
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-id-card item-icon"></i><div class="item-content"><span class="item-title">Αντίγραφο Ταυτότητας</span><span class="item-note">Αντίγραφο ή καθαρές φωτογραφίες</span></div></div>
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-university item-icon"></i><div class="item-content"><span class="item-title">Λογαριασμός Τράπεζας (IBAN)</span><span class="item-note">Βεβαίωση e-banking ή φωτοτυπία 1ης σελίδας βιβλιαρίου</span></div></div>
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-mobile-alt item-icon"></i><div class="item-content"><span class="item-title">Εθνικό Μητρώο Επικοινωνίας (ΕΜΕΠ)</span><span class="item-note">Προϋπόθεση για την υποβολή ηλεκτρονικής αίτησης</span></div></div>
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-notes-medical item-icon"></i><div class="item-content"><span class="item-title">Γνωμάτευση ΚΕΠΑ</span></div></div>
-        </div>
-    </div>
-
-    <div class="category-card card-5" id="card-instructions">
-        <div class="category-header" onclick="toggleDocs('instructions', 'card-instructions')">
-            <span>Οδηγίες για ΚΕΠ (ΕΜΕΠ)</span> <i class="fas fa-info-circle"></i>
-        </div>
-        <div class="card-progress"><div class="card-progress-fill"></div></div>
-        <div id="instructions" class="docs-list">
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-mobile-screen item-icon"></i><div class="item-content"><span class="item-title">Κινητό τηλέφωνο στο όνομά σας</span><span class="item-note">Απαραίτητο για την ταυτοποίηση</span></div></div>
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-id-card-clip item-icon"></i><div class="item-content"><span class="item-title">Επίσκεψη στο ΚΕΠ με την ταυτότητα</span><span class="item-note">Έχετε μαζί και το κινητό σας</span></div></div>
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-pen-to-square item-icon"></i><div class="item-content"><span class="item-title">Δήλωση στο Εθνικό Μητρώο Επικοινωνίας (ΕΜΕΠ)</span><span class="item-note">Ζητήστε να δηλωθεί το κινητό και το email σας</span></div></div>
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-at item-icon"></i><div class="item-content"><span class="item-title">Email γραφείου για δήλωση:</span><span class="item-note"><code>sintaxi+το_ονοματεπώνυμό_σας@taxisdp.gr</code></span></div></div>
-            <div class="sos-note"><i class="fas fa-lightbulb"></i>Π.χ. αν το όνομα είναι Χαρά Πετρού: <code>sintaxi+xarapetrou@taxisdp.gr</code></div>
-        </div>
-    </div>
-
-    <div class="category-card card-6" id="card-kepa">
-        <div class="category-header" onclick="toggleDocs('kepa', 'card-kepa')">
-            <span>Οδηγίες για ΚΕΠΑ</span> <i class="fas fa-notes-medical"></i>
-        </div>
-        <div class="card-progress"><div class="card-progress-fill"></div></div>
-        <div id="kepa" class="docs-list">
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-laptop-medical item-icon"></i><div class="item-content"><span class="item-title">Ηλεκτρονική Αίτηση</span><span class="item-note">Η αίτηση για ΚΕΠΑ γίνεται πλέον ψηφιακά</span></div></div>
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-hashtag item-icon"></i><div class="item-content"><span class="item-title">Αριθμός Πρωτοκόλλου</span><span class="item-note">Μετά την αίτηση θα σας κοινοποιήσουμε τον αριθμό</span></div></div>
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-user-doctor item-icon"></i><div class="item-content"><span class="item-title">Επικοινωνία με Ιατρούς</span><span class="item-note">Θα συμπληρώσουν τον εισηγητικό φάκελο ψηφιακά</span></div></div>
-            <div class="doc-item" onclick="toggleCheck(this)"><i class="fas fa-comment-sms item-icon"></i><div class="item-content"><span class="item-title">Ενημέρωση με SMS</span><span class="item-note">Θα λάβετε μήνυμα για την ημερομηνία της εξέτασης</span></div></div>
-            <div class="sos-note"><i class="fas fa-exclamation-triangle"></i><strong>ΠΡΟΣΟΧΗ:</strong> Φροντίστε να έχετε μαζί σας όλες τις πρωτότυπες ιατρικές εξετάσεις την ημέρα της επιτροπής.</div>
-        </div>
-    </div>
-
-    <div class="footer-info">
-        <h3>Στοιχεία Επικοινωνίας</h3>
-        <div style="text-align: left; display: inline-block; margin-bottom: 15px;">
-            <p><i class="fas fa-map-marker-alt" style="color:var(--terracotta); width:20px"></i>Πατριάρχου Γρηγορίου Ε 10, Τρίπολη</p>
-            <p><i class="fas fa-envelope" style="color:var(--terracotta); width:20px"></i>sintaxi@taxisdp.gr</p>
-            <p><i class="fas fa-phone" style="color:var(--terracotta); width:20px"></i>2710 224 939</p>
-            <p><i class="fas fa-mobile-alt" style="color:var(--terracotta); width:20px"></i>6955 316 277</p>
-        </div>
-        <a href="viber://chat?number=%2B306955316277" class="btn-action btn-viber"><i class="fab fa-viber"></i>ΜΗΝΥΜΑ ΣΤΟ VIBER</a>
-        <a href="mailto:sintaxi@taxisdp.gr" class="btn-action btn-email"><i class="fas fa-envelope"></i>ΑΠΟΣΤΟΛΗ EMAIL</a>
-        <a href="tel:6955316277" class="btn-action btn-call"><i class="fas fa-phone-alt"></i>ΚΛΗΣΗ ΣΤΟ ΓΡΑΦΕΙΟ</a>
-        <a href="https://maps.app.goo.gl/fMJ6NYGDHn61NdSB8" target="_blank" class="btn-action btn-maps"><i class="fas fa-directions"></i>ΟΔΗΓΙΕΣ ΣΤΟΥΣ ΧΑΡΤΕΣ</a>
-    </div>
+    <footer class="app-footer">
+        <div class="footer-name">Πέτρος Γκόρος</div>
+        <div class="footer-desc">Συνταξιοδοτικές Υποθέσεις</div>
+        <div class="fc-item"><i class="fas fa-map-marker-alt"></i> Πατρ. Γρηγορίου Ε 10, Τρίπολη</div>
+        <div class="fc-item"><i class="fas fa-phone-alt"></i> 2710 224939 | 6955 316277</div>
+    </footer>
 </div>
 
 <script>
+    function setGreeting() {
+        const hour = new Date().getHours();
+        let greeting = (hour >= 6 && hour < 12) ? 'Καλημέρα!' : (hour >= 12 && hour < 15) ? 'Χαίρετε!' : (hour >= 15 && hour < 24) ? 'Καλησπέρα!' : 'Χαίρετε!';
+        document.getElementById('greetingText').innerHTML = `<strong style="color: #ffffff; font-size: 1.1rem; letter-spacing: 0.5px;">${greeting}</strong><br><span style="font-size: 0.75rem; color: #e2e8f0;">Αυτή είναι η λίστα με τα δικαιολογητικά σας.</span>`;
+    }
+
     function toggleDocs(listId, cardId) {
         const list = document.getElementById(listId);
         const card = document.getElementById(cardId);
-        const allLists = document.querySelectorAll('.docs-list');
-        allLists.forEach(l => { if(l.id !== listId) l.style.display = 'none'; });
         if (list.style.display === "block") {
             list.style.display = "none";
+            card.classList.remove('open');
         } else {
             list.style.display = "block";
-            setTimeout(() => { card.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 150);
+            card.classList.add('open');
         }
     }
-    function toggleCheck(element) { 
-        element.classList.toggle('checked'); 
+
+    function toggleCheck(element) {
+        element.classList.toggle('checked');
+        const icon = element.querySelector('.item-icon');
+        if (element.classList.contains('checked')) {
+            icon.className = 'fas fa-check-circle item-icon';
+        } else {
+            icon.className = 'far fa-circle item-icon';
+        }
         updateCardProgress(element.closest('.category-card'));
     }
+
     function updateCardProgress(card) {
         const total = card.querySelectorAll('.doc-item').length;
-        if(total === 0) return;
         const checked = card.querySelectorAll('.doc-item.checked').length;
-        const percent = Math.round((checked / total) * 100);
-        card.querySelector('.card-progress-fill').style.width = percent + '%';
+        if(total > 0) card.querySelector('.card-progress-fill').style.width = Math.round((checked / total) * 100) + '%';
     }
-</script>
 
+    function copyText() {
+        const text = document.getElementById('authText').innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            const toast = document.getElementById("toast");
+            toast.classList.add("show");
+            setTimeout(() => { toast.classList.remove("show"); }, 2500);
+        });
+    }
+
+    window.addEventListener('load', function() {
+        setGreeting();
+        const urlParams = new URLSearchParams(window.location.search);
+        const openParam = urlParams.get('open');
+        const mainCats = ['rantevou', 'giratos', 'thanatou', 'anapirias'];
+        
+        if (openParam && mainCats.includes(openParam)) {
+            mainCats.forEach(cat => {
+                if (cat !== openParam) {
+                    document.getElementById('card-' + cat).style.display = 'none';
+                }
+            });
+            toggleDocs(openParam, 'card-' + openParam);
+        }
+    });
+</script>
 </body>
 </html>
